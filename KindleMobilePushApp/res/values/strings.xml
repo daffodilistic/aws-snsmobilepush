@@ -1,0 +1,21 @@
+<!-- 
+Copyright 2013 Amazon.com, Inc. or its affiliates. All Rights Reserved. 
+Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with the License. A copy of the License is located at
+    http://aws.amazon.com/apache2.0/
+or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+-->
+<resources>
+    <string name="app_name">AmazonMobilePush</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">Amazon Mobile Push!</string>
+    <string name="json_data_msg_key">default</string>
+    <string name="json_data_time_key">timeStamp</string>
+    <string name="json_data_consolidation_key">collapse_key</string>
+    <string name="intent_msg_action">com.amazonaws.kindletest.ON_MESSAGE</string>
+    <string name="intent_msg_category">com.amazonaws.kindletest.MSG_CATEGORY</string>
+    <string name="welcome">Welcome to Amazon Mobile Push!\n\n</string>
+    <string name="num_of_missed_messages">MissedMessageCount</string>
+    <string name="preferences">Preferences</string>
+    <!--TODO: Enter your api key    -->
+    <string name="api_key"></string>
+</resources>

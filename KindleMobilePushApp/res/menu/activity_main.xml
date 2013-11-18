@@ -1,0 +1,11 @@
+<!-- 
+    [ADMMessenger]
+
+    (c) 2012, Amazon.com, Inc. or its affiliates. All Rights Reserved.
+-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menu_clear"
+        android:title="Clear Screen"
+        android:orderInCategory="100"
+        android:showAsAction="never" />
+</menu>

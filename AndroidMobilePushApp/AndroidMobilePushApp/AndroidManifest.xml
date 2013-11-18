@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Copyright 2013 Amazon.com, Inc. or its affiliates. All Rights Reserved. -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with the License. A copy of the License is located at -->
+<!-- http://aws.amazon.com/apache2.0/ -->
+<!-- or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License. -->
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.amazonaws.androidtest"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="18" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.REGISTER" />
+    <uses-permission android:name="com.amazonaws.androidtest.permission.C2D_MESSAGE" />
+
+    <permission
+        android:name="com.amazonaws.androidtest.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.amazonaws.androidtest.AndroidMobilePushApp"
+            android:label="@string/app_name"
+            android:launchMode="singleTop" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name="com.amazonaws.androidtest.MessageReceivingService"
+            android:label="com.amazonaws.androidtest.MessageReceivingService" >
+            <intent-filter>
+                <action android:name="com.amazonaws.androidtest.AndroidMobilePushApp" />
+                <action android:name="com.amazonaws.androidtest.ExternalReceiver" />
+                <category android:name="com.amazonaws.androidtest" />
+            </intent-filter>
+        </service>
+
+        <receiver
+            android:name="com.amazonaws.androidtest.ExternalReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+                <action android:name="com.google.android.c2dm.intent.REGISTER" />
+
+                <category android:name="com.amazonaws.androidtest" />
+            </intent-filter>
+        </receiver>
+    </application>
+</manifest>

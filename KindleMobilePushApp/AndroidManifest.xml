@@ -1,0 +1,66 @@
+<!-- Copyright 2013 Amazon.com, Inc. or its affiliates. All Rights Reserved.  -->
+<!-- Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with the License. A copy of the License is located at -->
+<!--     http://aws.amazon.com/apache2.0/ -->
+<!-- or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License. -->
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:amazon="http://schemas.amazon.com/apk/res/android"
+    package="com.amazonaws.kindletest"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="11"
+        android:targetSdkVersion="18" />
+    
+   <!-- This permission ensures that no other application can intercept your ADM messages. It
+   should have the form packagename.permission.RECIEVE_ADM_MESSAGE where packagename is the
+   name defined in the "package" property of the manifest tag. --> 
+    <permission android:name="com.amazonaws.kindletest.permission.RECEIVE_ADM_MESSAGE"
+        android:protectionLevel="signature"/>
+    
+    <!-- Required permissions -->
+    <uses-permission android:name="com.amazonaws.kindletest.permission.RECEIVE_ADM_MESSAGE"/>
+    <uses-permission android:name="com.amazon.device.messaging.permission.RECEIVE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+
+    <application
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"        
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.amazonaws.kindletest.KindleMobilePushApp"
+            android:screenOrientation="portrait"
+            android:label="@string/title_activity_main"
+            android:launchMode="singleTop" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <!-- Your application's API Key -->
+        <meta-data android:name="AmazonAPIKey" android:value="@string/api_key"/>
+        
+        <!--  Declare your ADMMessageHandlerBase implementation as a service -->
+        <service android:name="com.amazonaws.kindletest.ADMMessageHandler" 
+            android:exported="false" />
+        
+        <!-- You must explicitly enable ADM. You must also declare whether your application will run with or without ADM.
+        If you specify android:required="false", your app must degrade gracefully when ADM is unavailable. -->
+        <amazon:enable-feature android:name="com.amazon.device.messaging" 
+            android:required="true" />
+        
+        <receiver android:name="com.amazonaws.kindletest.ADMMessageHandler$MessageAlertReceiver" 
+            android:permission="com.amazon.device.messaging.permission.SEND">
+            <intent-filter>
+               <action android:name="com.amazon.device.messaging.intent.REGISTRATION" /> 
+               <action android:name="com.amazon.device.messaging.intent.RECEIVE" /> 
+               <category android:name="com.amazonaws.kindletest"/>
+            </intent-filter>
+        </receiver>       
+    </application>
+
+</manifest>
